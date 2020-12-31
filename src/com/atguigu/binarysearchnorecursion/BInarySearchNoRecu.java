@@ -15,7 +15,7 @@ public class BInarySearchNoRecu {
      * @param target 要查找的数
      * @return int 返回对应下标,-1表示没找到
      */
-    public static int binarySearch(int arr[], int target) {
+    public static int binarySearch(int[] arr, int target) {
         int left = 0;
         int right = arr.length - 1;
         while (left <= right) {
