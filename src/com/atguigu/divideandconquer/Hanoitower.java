@@ -2,7 +2,7 @@ package com.atguigu.divideandconquer;
 
 public class Hanoitower {
     public static void main(String[] args) {
-        hanoiTower(5,'A','B','C');
+        hanoiTower(5, 'A', 'B', 'C');
     }
 
     //移动的方法
@@ -17,7 +17,7 @@ public class Hanoitower {
             //把最下面的盘A->C
             System.out.println("第" + num + "个盘从" + a + "->" + c);
             //把b塔的所有盘移动到c
-            hanoiTower(num-1,b,a,c);
+            hanoiTower(num - 1, b, a, c);
         }
     }
 }
