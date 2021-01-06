@@ -49,7 +49,7 @@ public class GreedyAlgorithm {
         HashSet<String> tempSet = new HashSet<>();
         //定义maxKey,指向当前遍历过程中最大覆盖的key:如k1,k2....
         String maxKey = null;
-        while (allAreas.size() != 0) { //allAreas不为0,则表示还没有覆盖到所有地区
+        while (allAreas.size() > 0) { //allAreas不为0,则表示还没有覆盖到所有地区
             //maxkey置空
             maxKey = null;
             //遍历brodcasts,取出对应的key
