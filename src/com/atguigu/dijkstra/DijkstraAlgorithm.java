@@ -19,6 +19,7 @@ public class DijkstraAlgorithm {
         Graph graph = new Graph(vertex, matrix);
         graph.showGraph();
         graph.dsj(6);
+        graph.showDijkstra();
     }
 }
 
@@ -30,6 +31,10 @@ class Graph {
     public Graph(char[] vertexs, int[][] matrix) {
         this.vertex = vertexs;
         this.matrix = matrix;
+    }
+
+    public void showDijkstra(){
+        vv.show();
     }
 
     public void showGraph() {
@@ -49,6 +54,10 @@ class Graph {
     public void dsj(int index) {
         vv = new VistedVertex(vertex.length, index);
         update(index); // 更新index顶点到周围顶点的距离和前驱顶点
+        for (int j = 0; j < vertex.length; j++) {
+            index = vv.updateArr(); //选择并返回新的访问顶点
+            update(index); //更新index顶点到周围顶点的距离和前驱顶点
+        }
     }
 
     //更新index下标顶点到周围顶点的距离和周围顶点的前端顶点,
@@ -138,5 +147,36 @@ class VistedVertex {
      */
     public int getDis(int index) {
         return dis[index];
+    }
+
+    //继续选择并返回新的访问顶点
+    public int updateArr() {
+        int min = 65535, index = 0;
+        for (int i = 0; i < already_arr.length; i++) {
+            if (already_arr[i] == 0 && dis[i] < min) {
+                //此顶点未被访问
+                min = dis[i];
+                index = i;
+            }
+        }
+        //更新index被访问过
+        already_arr[index] = 1;
+        return index;
+    }
+
+    //显示最后的结果,将三个数组输出
+    public void show(){
+        System.out.println("====================");
+        for (int i :already_arr){
+            System.out.printf(i+" ");
+        }
+        System.out.println();
+        for (int i :pre_visted){
+            System.out.printf(i+" ");
+        }
+        System.out.println();
+        for (int i :dis){
+            System.out.printf(i+" ");
+        }
     }
 }
