@@ -16,6 +16,7 @@ public class FloydAlgorithm {
                 {2, 3, N, N, 4, 6, 0}
         };
         Graph graph = new Graph(vertex.length, matrix, vertex);
+        graph.floyd();
         graph.show();
     }
 }
@@ -58,7 +59,25 @@ class Graph {
             System.out.println();
             System.out.println();
         }
+    }
 
+    //弗洛伊德算法
+    public void floyd() {
+        int len = 0; //变量保存距离
+        //对中间顶点的遍历,k是中间顶点下标
+        for (int k = 0; k < dis.length; k++) {
+            //对出发顶点遍历A B C...
+            for (int i = 0; i < dis.length; i++) {
+                //到达顶点的遍历
+                for (int j = 0; j < dis.length; j++) {
+                    len = dis[i][k] + dis[k][j]; //从i顶点出发,经过k中间点,到达j的距离
+                    if (len < dis[i][j]) {
+                        dis[i][j] = len; //更新i和j的距离
+                        pre[i][j] = pre[k][j]; //更新前驱顶点
+                    }
+                }
+            }
 
+        }
     }
 }
