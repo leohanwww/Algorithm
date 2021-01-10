@@ -2,6 +2,7 @@ package com.atguigu.horse;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 //马踏棋盘问题
 public class HorseChessboard {
@@ -52,6 +53,8 @@ public class HorseChessboard {
         visited[row * X + column] = true;
         //获取当前位置可以走的下一个位置的集合
         ArrayList<Point> ps = next(new Point(column, row));
+        //对ps所有的Point对象下一步的位置集合的大小进行非递减排序
+        sort(ps);
         //遍历ps
         while (!ps.isEmpty()) {
             Point p = ps.remove(0); //取出一个下一个可以走的位置
@@ -114,5 +117,24 @@ public class HorseChessboard {
             ps.add(new Point(p1));
         }
         return ps;
+    }
+
+    //根据当前这一步所有的下一步的选择位置,进行非递减排序,减少回溯次数
+    public static void sort(ArrayList<Point> ps) {
+        ps.sort(new Comparator<Point>() {
+            @Override
+            public int compare(Point o1, Point o2) {
+                //获取o1的下一步的下一步的所有位置个数
+                int count1 = next(o1).size();
+                int count2 = next(o2).size();
+                if (count1 < count2) {
+                    return -1;
+                } else if (count1 == count2) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        });
     }
 }
